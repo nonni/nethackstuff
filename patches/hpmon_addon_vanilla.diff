@@ -1,0 +1,76 @@
+--- nhhpmon/src/botl.c	2012-04-17 22:51:15.161947400 +0000
++++ nhpatched/src/botl.c	2012-04-17 22:56:34.434208700 +0000
+@@ -325,10 +325,38 @@
+ 
+ 	if(flags.time)
+ 	    Sprintf(nb = eos(nb), " T:%ld", moves);
+-	if(strcmp(hu_stat[u.uhs], "        ")) {
+-		Sprintf(nb = eos(nb), " ");
+-		Strcat(newbot2, hu_stat[u.uhs]);
+-	}
++
++/* Hungry color patch */
++#ifdef HPMON
++#ifdef TEXTCOLOR
++        curs(WIN_STATUS, 1, 1);
++        putstr(WIN_STATUS, 0, newbot2);
++#endif
++#endif
++        if(strcmp(hu_stat[u.uhs], "        ")) {
++                Sprintf(nb = eos(nb), " ");
++                Strcat(newbot2, hu_stat[u.uhs]);
++        }
++#ifdef HPMON
++#ifdef TEXTCOLOR
++        if(strcmp(hu_stat[u.uhs], "        ")) {
++                    curs(WIN_STATUS, 1, 1);
++                    if(!strcmp(hu_stat[u.uhs], "Hungry  "))
++                        term_start_color(CLR_YELLOW);
++                    else if(!strcmp(hu_stat[u.uhs], "Weak    "))
++                        term_start_color(CLR_ORANGE);
++                    else if(!strcmp(hu_stat[u.uhs], "Fainting")
++                                 || !strcmp(hu_stat[u.uhs], "Fainted "))
++                        term_start_color(CLR_RED);
++                    else
++                        term_start_color(NO_COLOR);
++                    putstr(WIN_STATUS, ATR_NONE, newbot2);
++                    term_end_color();
++        }
++#endif
++#endif
++/* EIFG */
++
+ 	if(Confusion)	   Sprintf(nb = eos(nb), " Conf");
+ 	if(Sick) {
+ 		if (u.usick_type & SICK_VOMITABLE)
+@@ -340,8 +368,28 @@
+ 	if(Stunned)	   Sprintf(nb = eos(nb), " Stun");
+ 	if(Hallucination)  Sprintf(nb = eos(nb), " Hallu");
+ 	if(Slimed)         Sprintf(nb = eos(nb), " Slime");
+-	if(cap > UNENCUMBERED)
+-		Sprintf(nb = eos(nb), " %s", enc_stat[cap]);
++
++        /* Burden color patch */
++#ifdef HPMON
++#ifdef TEXTCOLOR
++        curs(WIN_STATUS, 1, 1);
++        putstr(WIN_STATUS, 0, newbot2);
++#endif
++#endif
++        if(cap > UNENCUMBERED)
++                Sprintf(nb = eos(nb), " %s", enc_stat[cap]);
++#ifdef HPMON
++#ifdef TEXTCOLOR
++        if(cap > UNENCUMBERED) {
++                curs(WIN_STATUS, 1, 1);
++                term_start_color(CLR_MAGENTA);
++                putstr(WIN_STATUS, ATR_NONE, newbot2);
++                term_end_color();
++        }
++#endif
++#endif
++/* EOH */
++
+ 	curs(WIN_STATUS, 1, 1);
+ 	putstr(WIN_STATUS, 0, newbot2);
+ }

@@ -1,0 +1,6 @@
+My nethack config and a few patches to make the game more enjoyable.
+
+Patches for NetHack
+  --- Color HP Monitor, Hunger and burdened addon ---
+    patches/hpmon_addon_vanilla.diff - contains patch for Vanilla nethack (apply hp monitor patch first http://bilious.alt.org/?45)
+    patches/hpmon_addon_NAO.diff - contains patch for NAO version of nethack (apply NAO diff first http://alt.org/nethack/naonh.php)
