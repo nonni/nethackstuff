@@ -3,10 +3,12 @@
 # This config file applies to NetHack with NAO patches applied.
 
 # Here are some examples of reasonable defaults:
-OPTIONS=name:Player
+#OPTIONS=name:player
+OPTIONS=name:player
 OPTIONS=autopickup,pickup_types:$"=/!?+
-OPTIONS=showexp,showscore,time,color
+OPTIONS=showscore,time,color
 OPTIONS=autodig,fruit:slime mold,boulder:0
+OPTIONS=pushweapon
 
 OPTIONS=msg_window:reversed
 
@@ -37,6 +39,7 @@ OPTIONS=paranoid_quit
 #OPTIONS=sortloot:full
 #
 OPTIONS=showbuc
+OPTIONS=showrealtime
 #
 #OPTIONS=win_edge
 #
