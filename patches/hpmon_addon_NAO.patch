@@ -4,6 +4,7 @@
                                         (currenttime % 3600) / 60);
    }
  #endif
+
 +
 +/* Hungry color patch */
 +#ifdef HPMON
